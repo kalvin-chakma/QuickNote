@@ -8,7 +8,8 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 // Import the table components
-import { Table, TableHeader, TableCell, TableRow } from './TableComponents';
+import * as MarkdownComponents from './markdownComponents';
+
 
 export default function MarkdownViewer({ content }) {
   const [copied, setCopied] = useState(null);
@@ -48,7 +49,7 @@ export default function MarkdownViewer({ content }) {
                   </SyntaxHighlighter>
                   <button
                     onClick={() => copyToClipboard(codeString, index)}
-                    className="absolute top-2 right-2 bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-500 transition duration-200"
+                    className="absolute top-2 right-2 mb-3 bg-gray-700 text-white text-sm px-3 py-0.5 rounded hover:bg-gray-500 transition duration-200"
                   >
                     {copied === index ? "Copied!" : "Copy"}
                   </button>
@@ -62,11 +63,19 @@ export default function MarkdownViewer({ content }) {
               </code>
             );
           },
-          // Use imported Table components for markdown rendering
-          table: Table,
-          th: TableHeader,
-          td: TableCell,
-          tr: TableRow,
+          table: MarkdownComponents.Table,
+          th: MarkdownComponents.TableHeader,
+          td: MarkdownComponents.TableCell,
+          tr: MarkdownComponents.TableRow,
+          ul: MarkdownComponents.UnorderedList,
+          ol: MarkdownComponents.OrderedList,
+          li: MarkdownComponents.ListItem,
+          blockquote: MarkdownComponents.BlockQuote,
+          hr: MarkdownComponents.HorizontalRule,
+          strong: MarkdownComponents.Strong,
+          em: MarkdownComponents.Emphasis,
+          del: MarkdownComponents.Strikethrough,
+          img: MarkdownComponents.Image,
         }}
       >
         {content}
